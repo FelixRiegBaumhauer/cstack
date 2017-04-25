@@ -9,6 +9,8 @@
 #include "matrix.h"
 #include "parser.h"
 
+#include "stack.h"
+
 
 /*======== void parse_file () ==========
 Inputs:   char * filename 
@@ -63,7 +65,8 @@ for PI)
 void parse_file ( char * filename, 
                   struct matrix * transform, 
                   struct matrix * edges,
-                  screen s) {
+                  screen s,
+		  struct stack * stak) {
 
   FILE *f;
   char line[255];
@@ -78,7 +81,7 @@ void parse_file ( char * filename,
     f = stdin;
   else
     f = fopen(filename, "r");
-  
+
   while ( fgets(line, sizeof(line), f) != NULL ) {
     line[strlen(line)-1]='\0';
     //printf(":%s:\n",line);
@@ -243,6 +246,25 @@ void parse_file ( char * filename,
       draw_lines(edges, s, c);
       save_extension(s, line);
     }//end save
+
+
+
+    //STACK WORK HERE
+
+
+    else if ( strncmp(line, "push", strlen(line)) == 0 ) {
+      push(stak);
+      //print_stack(stak);
+      
+    }//end of push
+
+    else if ( strncmp(line, "pop", strlen(line)) == 0 ) {
+      pop(stak);
+      //print_stack(stak);
+      
+    }//end of pop
+
+    
     
   }
 }
