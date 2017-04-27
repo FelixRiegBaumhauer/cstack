@@ -25,6 +25,6 @@ stack.o: stack.c stack.h
 	$(CC) $(CFLAGS) -c stack.c
 
 run: all
-	./main myscript
+	./main script
 clean:
 	rm *.o *~
